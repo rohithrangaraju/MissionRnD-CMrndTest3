@@ -50,8 +50,7 @@ void fixLinks(struct node* root, struct node* root2){
 	else{
 		if (root->right == NULL){ 
 			root->right = root2;
-			root->right->
-		    return; 
+	
 		}
 		else fixLinks(root->right, root2);
 	 }
