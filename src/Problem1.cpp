@@ -50,7 +50,26 @@ struct node{
 	struct node *right;
 };
 
-
+void inorder1(struct node *root,int* i){
+	if (root == NULL)return;
+	inorder1(root->left, i);
+	(*i) = ((*i) - root->data);
+	inorder1(root->right, i);
+}
 int get_missing_value(struct node *root,int n){
-    return -1;
+	if (root == NULL || n == 0)return -1;
+	if (n >= -10000 && n <= 10000){
+		//int *arr = (int*)calloc(n, sizeof(int));
+		int *index = (int*)calloc(1, sizeof(int));
+		//finding some of numbers.
+		int sum = n*(n + 1) / 2;
+		*index = sum;
+		inorder1(root,index);
+		//quicksort(arr, 0, n - 1);
+		int x = (*index);
+		//free(arr);
+		free(index);
+		return x;
+	}
+	else return -1;
 }

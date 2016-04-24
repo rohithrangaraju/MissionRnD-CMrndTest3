@@ -36,6 +36,35 @@ struct node{
 	struct node *right;
 };
 
+void fixLinks(struct node* root, struct node* root2){
+	//if (root2->data == root->data)return;
+	 if (root2->data < root->data){
+		if (root->left == NULL){
+			root->left = root2;
+			root->left->right->left = NULL;
+			root->left->right->right = NULL;
+				return;
+		}
+		else fixLinks(root->left, root2);
+	}
+	else{
+		if (root->right == NULL){ 
+			root->right = root2;
+			root->right->
+		    return; 
+		}
+		else fixLinks(root->right, root2);
+	 }
+}
+void inorder2(struct node *root,struct node* root1){
+	if (root == NULL)return;
+	inorder2(root->left,root1);
+	fixLinks(root1,root);
+	inorder2(root->right,root1);
+}
+
 void merge_two_bst(struct node *root1, struct node *root2){
-	
+	if (root1 == NULL || root2 == NULL)return;
+		inorder2(root2,root1);
+
 }

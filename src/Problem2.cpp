@@ -70,7 +70,44 @@ struct node{
 	struct node *left;
 	struct node *right;
 };
+int length(struct node_dll* head){
+	int len=0;
+	struct node_dll* temp = head;
+	while (temp != NULL){
+		len++;
+		temp = temp->next;
+	}
+	return len;
+}
+int sizeOftree(struct node* head){
+	if (head == NULL)return 0;
+	else return 1 + sizeOftree(head->left) + sizeOftree(head->right);
+
+}
+int check(int n,struct node_dll* head){
+	struct node_dll* temp = head;
+	while (temp != NULL){
+		if (n == temp->data)return 1;
+		temp = temp->next;
+	}
+  return 0;
+}
+void checkTreeAndList(struct node* root, struct node_dll* head,int *p){
+	if (head == NULL || root == NULL)return;
+	checkTreeAndList(root->left, head, p);
+	(*p) = check(root->data, head);
+	checkTreeAndList(root->right, head, p);
+}
 
 int is_identical(struct node_dll *head, struct node *root){
-	return -1;
+	if (head == NULL || root == NULL)return -1;
+	int dlllenth = length(head);
+	int treelength = sizeOftree(root);
+	if (dlllenth != treelength)return 0;
+	int *n = (int*)calloc(1, sizeof(int));
+	(*n) = 1;
+	checkTreeAndList(root, head, n);
+	int value = (*n);
+	free(n);
+	return value;
 }
