@@ -44,24 +44,14 @@ void fixLinks(struct node* root, struct node* root2){
 		return;
 	}
 	 if (root2->data < root->data){
-		if (root->left == NULL){
-			root->left = root2;
-			root->left->left = NULL;
-			root->left->right = NULL;
-				return;
-		}
-		else fixLinks(root->left, root2);
+	
+	     fixLinks(root->left, root2);
 	}
-	else{
-		if (root->right == NULL){ 
-			root->right = root2;
-			root->right->left = NULL;
-			root->right->right = NULL;
-		    return; 
-		}
-		else fixLinks(root->right, root2);
+	else{ 
+
+		 fixLinks(root->right, root2);
 	 }
-	return;
+	//return;
 }
 void inorder2(struct node *root,struct node* root1){
 	if (root == NULL)return;
